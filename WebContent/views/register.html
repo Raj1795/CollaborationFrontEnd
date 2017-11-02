@@ -1,0 +1,110 @@
+
+ <head> 
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+		<!-- Website CSS style -->
+	<!--	<link href="css/bootstrap.min.css" rel="stylesheet">
+
+		Website Font style-->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+	<!--	<link rel="stylesheet" href="style.css">-->
+		<!-- Google Fonts -->
+		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+
+		<title>Registration Page</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row main">
+				<div class="main-login main-center">
+				<h3>Welcome To Registration Process</h3>
+				<br>
+				<span style='color:red' ng-if="error.code==1">{{error.message}}</span>
+					<form >
+						
+						<div class="form-group">
+							<label for="firstName" class="cols-sm-2 control-label">Your First Name</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" ng-model="user.firstName"  placeholder="Enter your First Name">
+								</div>
+							</div>
+						</div>
+                        <br>
+                         <br>
+                        <div class="form-group">
+							<label for="lastName" class="cols-sm-2 control-label">Your Last Name</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" ng-model="user.lastName" placeholder="Your Last Name">
+								</div>
+							</div>
+						</div>
+						 <br>
+                         <br>
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label">Your Email</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" ng-model="user.email"  placeholder="Enter your Email">
+									<span style='color:red' ng-if="error.code==3">{{error.message}}</span>
+								</div>
+							</div>
+						</div>
+ <br>
+                         <br>
+						<div class="form-group">
+							<label for="username" class="cols-sm-2 control-label">Username</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" ng-model="user.userId"  placeholder="Enter your Username">
+									<span style='color:red' ng-if="error.code==2">{{error.message}}</span>
+								</div>
+							</div>
+						</div>
+ <br>
+                         <br>
+						<div class="form-group">
+							<label for="password" class="cols-sm-2 control-label">Password</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="password" class="form-control" ng-model="user.password" placeholder="Enter your Password">
+								</div>
+							</div>
+						</div>
+ <br>
+                         <br>
+						<div class="form-group">
+							<label for="role" class="cols-sm-2 control-label">Select Role</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									 <br>
+									<input type="radio" class="form-control" ng-model="user.role" value="STUDENT">Student
+									<input type="radio" class="form-control" ng-model="user.role" value="ALUMNI">Alumni
+									<input type="radio" class="form-control" ng-model="user.role" value="EMPOLYEE">Employee
+								</div>
+							</div>
+						</div>
+ <br>
+                         <br>
+						<div class="form-group ">
+							<input type="submit" value="Register" ng-click="register()">
+						</div>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+
+		 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed 
+    <script src="js/bootstrap.min.js"></script>-->
+	</body>

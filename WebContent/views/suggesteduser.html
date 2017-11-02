@@ -1,0 +1,21 @@
+<table class="table table-striped">
+<thead>
+<tr>
+<th><B>Name</B></th>
+<th><B>Online Status</B></th>
+<th><B>Role</B></th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="list in suggestedUser">
+<td>{{list.firstName}}{{list.lastName}}</td>
+<td>{{list.isOnline}}</td>
+<td>{{list.role}}</td>
+<td><img src="http://localhost:8082/CollaborateRestfulService/getprofilepic/{{list.userId}}" alt="No Image" width="30px" height="30px" class="img-rounded"></td>
+<td><a class="btn btn-default" ng-click="sendRequest(list.userId)">Send Request</a></td>
+</tr>
+
+</tbody>
+</table>
+
+

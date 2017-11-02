@@ -1,0 +1,10 @@
+<table class="table table-striped">
+<tbody>
+<tr ng-repeat="list in pendingRequest">
+<td>{{list.fromId}}</td>
+<td><img src="http://localhost:8082/CollaborateRestfulService/getprofilepic/{{list.fromId}}" alt="No Image" width="30px" height="30px" class="img-rounded"></td>
+<td><a class="btn btn-primary" ng-click="updateRequest(list,'A')"><B>Accept</B></a></td>
+<td><a class="btn btn-warning" ng-click="updateRequest(list,'D')"><B>Ignore</B></a></td>
+</tr>
+</tbody>
+</table>
