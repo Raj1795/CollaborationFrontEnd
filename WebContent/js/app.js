@@ -13,7 +13,8 @@ app.config(function($routeProvider){
 		controller:'UserController'
 	})
 	.when('/home',{
-		templateUrl:'views/home.html'
+		templateUrl:'views/home.html',
+		controller:'HomeController'
 	})
 	.when('/login',{
 		templateUrl:'views/login.html',
@@ -58,10 +59,12 @@ app.config(function($routeProvider){
 		templateUrl:'views/pendingrequest.html',
 		controller:'FriendController'
 	})
-	.when('/home',{
-		templateUrl:'views/home.html',
-		controller:'HomeController'
+	.when('/chat',{
+		templateUrl:'views/chat.html',
+		controller:'ChatController'
 	})
+		
+	
 	.otherwise({
 		templateUrl:'views/home.html',
 			

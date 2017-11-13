@@ -19,8 +19,18 @@
 <script type="text/javascript" src="services/BlogService.js"></script>
 <script type="text/javascript" src="services/JobService.js"></script>
 <script type="text/javascript" src="services/FriendService.js"></script>
-
+ <script src="sockjs/sockjs.js"></script>
+    <script src="stomp/dist/stomp.js"></script>
+<script type="text/javascript" src="controller/ChatController.js"></script>
+<script type="text/javascript" src="services/ChatService.js"></script>
+ 
 <head>
+ 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -30,36 +40,59 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<link href="css/sample.css"/>
+<link rel="stylesheet" href="css/sample.css">
 <title>INDEX</title>
 </head>
 
-<body ng-app="app">
-
-<a href="#/register" ng-hide="currentUser.userId">Register</a>
-<a href="#/login"  ng-hide="currentUser.userId">Login</a>
-<a href="#/home">Home</a>
-<a href="#" ng-show="currentUser.userId"> Welcome {{currentUser.userId}}</a>
-<a href="#/editprofile" ng-show="currentUser.userId">Edit Details</a>
-<a href="" ng-click="logout()" ng-show="currentUser.userId">Logout</a>
-<a href="#/addJob" ng-show="currentUser.role=='ADMIN'">Add Job</a>
-<a href="#/getJobs"ng-show="currentUser.userId">View Jobs</a>
-<a href="#profilepic" ng-show="currentUser.userId">
-                    <img src="http://localhost:8082/CollaborateRestfulService/getprofilepic/{{currentUser.userId}}" alt="upload Picture" width="30px" height="30px" class="img-rounded">
-                    </a>
- <a href="#/getSuggestedUser"ng-show="currentUser.userId">People You May Know</a> 
-     <a href="#/pendingRequest"ng-show="currentUser.userId">Request By Friends</a>   
-     
-     <li class="dropdown"><a href="" class="dropdown-toggle"
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Social</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#/home">Home</a></li>
+     <li><a href="#" ng-show="currentUser.userId"> Welcome {{currentUser.userId}}</a></li>
+      <li><a href="#/editprofile" ng-show="currentUser.userId">Edit Details</a></li>
+    <li><a href="#profilepic" ng-show="currentUser.userId">
+   <img src="http://localhost:8082/CollaborateRestfulService/getprofilepic/{{currentUser.userId}}" alt="upload Picture" width="30px" height="30px" class="img-rounded">
+                    </a></li>
+      
+      <li class="dropdown" >
+        <a href="" class="dropdown-toggle" data-toggle="dropdown" ng-show="currentUser.userId" >Blogs
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#/createblog">Create Blog</a></li>
+          <li><a href="#/getblogs">View Blogs</a></li>
+         </ul>
+      </li>
+      <li class="dropdown" >
+        <a  href="" class="dropdown-toggle" data-toggle="dropdown" ng-show="currentUser.userId" >Jobs
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#/addJob" ng-show="currentUser.role=='ADMIN'">Add Job</a></li>
+          <li><a href="#/getJobs">View Jobs</a></li>
+         </ul>
+      </li>
+      
+       <li class="dropdown" >
+        <a href="" class="dropdown-toggle" data-toggle="dropdown" ng-show="currentUser.userId" >Friend
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#/getSuggestedUser"  >People You May Know</a></li>
+         
+         </ul>
+      </li>
+      
+       <li class="dropdown"><a href="" class="dropdown-toggle"
 							data-toggle="dropdown" ng-show="currentUser.userId"> <span
 								class="glyphicon glyphicon-globe" ng-click="updateLength()"> <span
-									class="rw-number-notification" ng-if="approvalStatusLength>0">{{approvalStatusLength}}</span></span></a>
+									class="rw number-notification" ng-if="approvalStatusLength>0">{{approvalStatusLength}}</span></span></a>
 
 							<ul class="dropdown-menu">
 
 								<li ng-repeat="blog in blogApprovalStatus"><a
-									href="" ng-click="updateViewedStatus(blog)">Blog titled <b>"{{blog.blogTitle}}"</b>
-										is <span ng-if="blogPost.approved">Approved</span>
+									href="" ng-click="updateViewedStatus(blog)">Blog titled <b>"{{blog.blogName}}"</b>
+										is <span ng-if="blog.approved">Approved</span>
 										
 										<span
 										ng-if="!blog.approved"><div class="container">rejected
@@ -67,59 +100,30 @@
 										</span>
 								</a></li>
 
-							</ul></li>           
-<style>
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-}
-</style>
-<div class="dropdown" ng-show="currentUser.userId">
-  <button class="dropbtn">Blogs</button>
-  
-  <div class="dropdown-content">
-    <a href="#/createblog">Create New Blog</a>
-    <a href="#/getblogs">Get Blogs</a>
-    </div>
-  </div> 
- 
+							</ul></li>   
+	  <li class="dropdown"><a href="#/pendingRequest" class="dropdown-toggle"
+							data-toggle="dropdown" ng-show="currentUser.userId"> <span
+								class="glyphicon glyphicon-user" > <span
+									class="rw number-notification" ng-if="pendingRequestLength>0">{{pendingRequestLength}}</span></span></a>
+							</li>
+							
+		 <li><a href="#/chat" ng-show="currentUser.userId">Chat Room </a></li>
+     
+    </ul>
     
+   
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#/register" ng-hide="currentUser.userId"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#/login"  ng-hide="currentUser.userId"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+       <li><a href="" ng-click="logout()" ng-show="currentUser.userId"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav> 
+
+<body ng-app="app">
+
 <div ng-view> </div>
+
 </body>
 
 

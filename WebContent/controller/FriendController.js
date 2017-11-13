@@ -1,4 +1,4 @@
-app.controller('FriendController',function($scope,$location,FriendService)
+app.controller('FriendController',function($scope,$location,FriendService,$rootScope)
 		{
 	function listOfSuggestedUsers(){
 		
@@ -23,6 +23,7 @@ app.controller('FriendController',function($scope,$location,FriendService)
 	function pendingRequest(){
 		FriendService.pendingRequest().then(function(response){
 			$scope.pendingRequest=response.data
+			$rootScope.pendingRequestLength=$scope.pendingRequest.length  
 		},function(response){
 		if(response.status==401){
 			$location.path('/login')

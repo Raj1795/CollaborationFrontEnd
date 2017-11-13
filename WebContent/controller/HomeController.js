@@ -4,7 +4,7 @@ app.controller('HomeController',function(BlogService,$rootScope,$location){
 		BlogService.getNotification().then(function(response){
 			$rootScope.blogApprovalStatus=response.data 
 			$rootScope.approvalStatusLength=$rootScope.blogApprovalStatus.length  
-			console.log(approvalStatusLength)
+			
 		},function(response){
 			if(response.status==401)
 				$location.path('/login')

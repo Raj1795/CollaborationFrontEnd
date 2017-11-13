@@ -1,17 +1,48 @@
-<form>
-<div class="form-group">
-<span style='color:red'>{{error}}</span>
-<br>
-<b>Enter the UserName:</b>
-<input type="text" ng-model="user.userId" class="form-control">
-</div>
-<br>
-<div class="form-group">
-<b>Enter the Password:</b>
-<input type="password" ng-model="user.password" class="form-control">
+	 <head> 	
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+	<title>Login Page</title>
+	</head>
+	
+	<div class="container">
+			<div class="row main">
+				<div class="panel-heading">
+	               <div class="panel-title text-center">
+	               		<h1 class="title">Login Process</h1>
+	               		<hr />
+	               	</div>
+	            </div> 
+				<div class="main-login main-center">
+					<form class="form-horizontal" >
+						<div class="form-group">
+							<label for="username" class="cols-sm-2 control-label">Username</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" ng-model="user.userId"   placeholder="Enter your Username"/>
+								</div>
+							</div>
+						</div>
 
+						<div class="form-group">
+							<label for="password" class="cols-sm-2 control-label">Password</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="password" class="form-control"  ng-model="user.password" placeholder="Enter your Password"/>
+								</div>
+							</div>
+						</div>
 
-</div>
-<input type="submit" ng-click="login()">
-
-</form>
+						<div class="form-group ">
+							<button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="login()">Let Me In</button>
+						</div>
+						<div class="login-register">
+				            <a href="#/register">Create account</a> 
+				         </div>
+					</form>
+				</div>
+			</div>
+		</div>
